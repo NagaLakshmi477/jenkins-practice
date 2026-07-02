@@ -15,7 +15,6 @@ pipeline {
                 script {
                     sh """
                         echo "hello build"
-                        sleep 10
                         env
                     """
                     }

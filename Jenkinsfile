@@ -9,6 +9,11 @@ pipeline {
         timeout(time: 1,unit: 'MINUTES')
         disableConcurrentBuilds()
         }
+         parameters {
+        string(name: 'DEPLOY_TAG', defaultValue: 'latest', description: 'The Git tag to deploy')
+        choice(name: 'TARGET_ENV', choices: ['development', 'staging', 'production'], description: 'Select environment')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Check to execute test suite')
+    }
 // build
     stages {
         stage('Build') {
@@ -18,6 +23,7 @@ pipeline {
                         echo "hello build"
                         sleep 10    
                         env
+                        echo "Deploying version ${params.DEPLOY_TAG} to ${params.TARGET_ENV}..."
                     """
                     }
             }
@@ -34,6 +40,7 @@ pipeline {
                 echo 'Deploying...'
             }
         }
+        
     }
     // Post section it will run pipline is sucess
     // we need to delete data after running pipeline

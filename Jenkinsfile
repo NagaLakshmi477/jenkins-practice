@@ -36,6 +36,11 @@ pipeline {
         }
 
         stage('Deploy') {
+         input {
+                message "Deploy build to the staging environment?"
+                ok "Yes, deploy"
+                submitter "release-leads,admin-user"
+            }
             steps {
                 echo 'Deploying...'
             }

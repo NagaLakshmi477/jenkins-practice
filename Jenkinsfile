@@ -16,7 +16,7 @@ pipeline {
     }
 // build
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
                 script {
                     sh """
